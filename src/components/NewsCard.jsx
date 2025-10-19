@@ -19,7 +19,9 @@ const NewsCard = ({ news }) => {
     return [...Array(5)].map((_, index) => (
       <svg
         key={index}
-        className="w-5 h-5"
+        className={`w-5 h-5 ${
+          index < rating.number ? "text-orange-500" : "text-gray-300"
+        }`}
         fill="currentColor"
         viewBox="0 0 20 20"
       >

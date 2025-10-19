@@ -22,3 +22,7 @@
 .category-aside > a.active {
   @apply bg-base-300;
 }
+
+/* .linksNav > a.active {
+  @apply bg-base-300;
+} */
