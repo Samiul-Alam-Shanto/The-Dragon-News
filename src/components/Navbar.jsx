@@ -57,8 +57,9 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+        <div>{user && user.email}</div>
       </div>
-      <div>{user && user.email}</div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="linksNav menu menu-horizontal text-accent px-1">
           {links}
@@ -66,18 +67,14 @@ const Navbar = () => {
       </div>
       <div className="navbar-end gap-3">
         <img
-          className="rounded-full"
+          className="rounded-full w-10 h-10"
           src={user ? user.photoURL : userImg}
           alt=""
         />
         {user ? (
-          <Link
-            to="/auth/login"
-            onClick={handleLogout}
-            className="btn btn-primary"
-          >
+          <button onClick={handleLogout} className="btn btn-primary">
             Log Out
-          </Link>
+          </button>
         ) : (
           <Link to="/auth/login" className="btn btn-primary">
             Login
