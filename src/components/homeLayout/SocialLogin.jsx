@@ -1,11 +1,25 @@
 import React, { use } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useNavigate } from "react-router";
 
 const SocialLogin = () => {
-  const { googleSignIn } = use(AuthContext);
+  const { googleSignIn, githubSignIn } = use(AuthContext);
+  const navigate = useNavigate();
   const handleGoogleLogin = () => {
     googleSignIn()
-      .then(() => alert("SignIn Successful"))
+      .then(() => {
+        alert("SignIn Successful");
+        navigate("/");
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const handleGithubLogin = () => {
+    githubSignIn()
+      .then(() => {
+        alert("SignIn Successful");
+        navigate("/");
+      })
       .catch((error) => alert(error.message));
   };
 
@@ -15,7 +29,7 @@ const SocialLogin = () => {
       {/* Google */}
       <button
         onClick={handleGoogleLogin}
-        className="btn m-1 btn-outline  text-blue-300"
+        className="btn m-1 btn-outline w-full  text-blue-300"
       >
         <svg
           aria-label="Google logo"
@@ -47,7 +61,10 @@ const SocialLogin = () => {
         Login with Google
       </button>
       {/* GitHub */}
-      <button className="btn m-1 btn-outline text-accent">
+      <button
+        onClick={handleGithubLogin}
+        className="btn m-1 btn-outline w-full text-accent"
+      >
         <svg
           aria-label="GitHub logo"
           width="16"

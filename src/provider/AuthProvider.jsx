@@ -1,7 +1,9 @@
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -26,12 +28,23 @@ const AuthProvider = ({ children }) => {
 
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = () => {
-    signInWithPopup(auth, googleProvider);
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  const githubProvider = new GithubAuthProvider();
+  const githubSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
   };
 
   const updateUser = (updatedData) => {
     setLoading(true);
     return updateProfile(auth.currentUser, updatedData);
+  };
+
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
 
   const logout = () => {
@@ -53,7 +66,9 @@ const AuthProvider = ({ children }) => {
     createUser,
     loginUser,
     googleSignIn,
+    githubSignIn,
     updateUser,
+    resetPassword,
     logout,
     loading,
   };

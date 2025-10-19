@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useNavigation } from "react-router";
+import { Outlet, useLoaderData, useNavigation } from "react-router";
 import Header from "../components/Header";
 import LatestNews from "../components/LatestNews";
 import Navbar from "../components/Navbar";
@@ -9,13 +9,16 @@ import Loading from "../components/Loading";
 
 const HomeLayout = () => {
   const { state } = useNavigation();
+  const data = useLoaderData();
+
+  const filteredData = data.filter((news) => news.others.is_trending == true);
 
   return (
     <div>
       <header>
         <Header />
         <section className="container mx-auto my-3">
-          <LatestNews />
+          <LatestNews filteredData={filteredData} />
         </section>
         <nav className="container mx-auto my-3">
           <Navbar />
