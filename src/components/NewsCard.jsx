@@ -1,8 +1,10 @@
 import React from "react";
 import { Eye } from "lucide-react";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
-  const { title, author, thumbnail_url, details, rating, total_view } = news;
+  const { id, title, author, thumbnail_url, details, rating, total_view } =
+    news;
 
   // Format date
   const formatDate = (dateString) => {
@@ -100,9 +102,12 @@ const NewsCard = ({ news }) => {
         <p className="text-gray-700 text-sm leading-relaxed mb-2">
           {details.substring(0, 215)}...
         </p>
-        <button className="text-orange-500 font-semibold text-sm hover:underline">
+        <Link
+          to={`/news-details/${id}`}
+          className="text-orange-500 font-semibold text-sm hover:underline"
+        >
           Read More
-        </button>
+        </Link>
       </div>
 
       {/* Footer */}

@@ -2,10 +2,10 @@ import React from "react";
 
 const SocialLogin = () => {
   return (
-    <div>
+    <div className="">
       <h2 className="font-bold  mb-3">Login With</h2>
       {/* Google */}
-      <button className="btn btn-outline mb-2 text-blue-300">
+      <button className="btn m-1 btn-outline  text-blue-300">
         <svg
           aria-label="Google logo"
           width="16"
@@ -36,7 +36,7 @@ const SocialLogin = () => {
         Login with Google
       </button>
       {/* GitHub */}
-      <button className="btn btn-outline text-accent">
+      <button className="btn m-1 btn-outline text-accent">
         <svg
           aria-label="GitHub logo"
           width="16"

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
-import user from "../assets/user.png";
+import userImg from "../assets/user.png";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logout, setUser } = use(AuthContext);
   const links = (
     <>
       <li>
@@ -18,6 +20,14 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -48,16 +58,31 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      <div>{user && user.email}</div>
       <div className="navbar-center hidden lg:flex">
         <ul className="linksNav menu menu-horizontal text-accent px-1">
           {links}
         </ul>
       </div>
       <div className="navbar-end gap-3">
-        <img src={user} alt="" />
-        <Link to="/auth/login" className="btn btn-primary">
-          Login
-        </Link>
+        <img
+          className="rounded-full"
+          src={user ? user.photoURL : userImg}
+          alt=""
+        />
+        {user ? (
+          <Link
+            to="/auth/login"
+            onClick={handleLogout}
+            className="btn btn-primary"
+          >
+            Log Out
+          </Link>
+        ) : (
+          <Link to="/auth/login" className="btn btn-primary">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

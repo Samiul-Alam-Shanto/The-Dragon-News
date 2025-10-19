@@ -1,14 +1,27 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const { loginUser } = use(AuthContext);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    loginUser(email, password)
+      .then(() => {
+        alert("Login SuccessFull");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="flex justify-center items-center min-h-[90vh]">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <h2 className="font-bold text-2xl text-center py-5">
           Login Your Account
         </h2>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="card-body">
             <fieldset className="fieldset">
               {/* email */}
